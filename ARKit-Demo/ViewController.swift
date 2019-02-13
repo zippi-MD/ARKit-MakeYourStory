@@ -71,6 +71,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc: StoryViewController = segue.destination as! StoryViewController
+        
+    }
+    
+    @IBAction func showStoryTapped(_ sender: Any) {
+        performSegue(withIdentifier: "StoryViewSegue", sender: nil)
+    }
+    
 
 
 }

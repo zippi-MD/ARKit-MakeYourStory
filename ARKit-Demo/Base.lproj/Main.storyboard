@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EK4-jC-pnq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -53,6 +53,9 @@
                                 <state key="normal" title="OK">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="showStoryTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Pm-Z4-EtS"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rY0-T4-jo5">
                                 <rect key="frame" x="10" y="30" width="355" height="50"/>
@@ -91,6 +94,7 @@
                         <outlet property="mouthImage" destination="hTP-xj-JCb" id="6Ze-LV-42n"/>
                         <outlet property="rightEyeImage" destination="fQs-BB-T8t" id="4fo-Af-gqN"/>
                         <outlet property="sceneView" destination="8bC-Xf-vdC" id="cQx-Hw-mFM"/>
+                        <segue destination="EK4-jC-pnq" kind="presentation" identifier="StoryViewSegue" id="XkF-qQ-iZq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
