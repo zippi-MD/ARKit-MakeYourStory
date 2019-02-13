@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EK4-jC-pnq">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -96,6 +96,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="53.600000000000001" y="27.436281859070466"/>
+        </scene>
+        <!--Story View Controller-->
+        <scene sceneID="Rwg-2Y-nwb">
+            <objects>
+                <viewController id="EK4-jC-pnq" customClass="StoryViewController" customModule="ARKit_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="N0i-DE-61Q" userLabel="Scene View" customClass="ARSCNView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1jd-rf-7GU" userLabel="crosshair">
+                                <rect key="frame" x="180" y="336" width="15" height="15"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="0.59439212328767121" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="IRM-Oi-IAU"/>
+                                    <constraint firstAttribute="width" constant="15" id="ySz-o9-iRK"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1jd-rf-7GU" firstAttribute="centerY" secondItem="XCD-Ei-8Gy" secondAttribute="centerY" id="hvA-MB-iJu"/>
+                            <constraint firstItem="1jd-rf-7GU" firstAttribute="centerX" secondItem="XCD-Ei-8Gy" secondAttribute="centerX" id="yNu-NY-oZ6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="XCD-Ei-8Gy"/>
+                    </view>
+                    <connections>
+                        <outlet property="crosshair" destination="1jd-rf-7GU" id="I9d-rT-TXG"/>
+                        <outlet property="sceneView" destination="N0i-DE-61Q" id="LyQ-XN-3Yq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vaZ-gv-MZL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1066.4000000000001" y="25.637181409295355"/>
         </scene>
     </scenes>
     <resources>

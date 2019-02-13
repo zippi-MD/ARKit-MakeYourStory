@@ -16,6 +16,11 @@
 		D4BF125F2213A02000270BB4 /* blinkLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BF125E2213A02000270BB4 /* blinkLeft.png */; };
 		D4BF12612213A02500270BB4 /* blinkRight.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BF12602213A02500270BB4 /* blinkRight.png */; };
 		D4BF12632213A0D800270BB4 /* mouth.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BF12622213A0D800270BB4 /* mouth.png */; };
+		D4BF12652213ABEA00270BB4 /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BF12642213ABEA00270BB4 /* StoryViewController.swift */; };
+		D4BF12692214900B00270BB4 /* SCNNodeHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BF12682214900B00270BB4 /* SCNNodeHelpers.swift */; };
+		D4BF126D221490B500270BB4 /* RWLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BF126A221490B500270BB4 /* RWLabel.swift */; };
+		D4BF126E221490B500270BB4 /* SCNVector3Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BF126B221490B500270BB4 /* SCNVector3Extension.swift */; };
+		D4BF126F221490B500270BB4 /* FloatingPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BF126C221490B500270BB4 /* FloatingPointExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +35,11 @@
 		D4BF125E2213A02000270BB4 /* blinkLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blinkLeft.png; sourceTree = "<group>"; };
 		D4BF12602213A02500270BB4 /* blinkRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blinkRight.png; sourceTree = "<group>"; };
 		D4BF12622213A0D800270BB4 /* mouth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mouth.png; sourceTree = "<group>"; };
+		D4BF12642213ABEA00270BB4 /* StoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
+		D4BF12682214900B00270BB4 /* SCNNodeHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNNodeHelpers.swift; sourceTree = "<group>"; };
+		D4BF126A221490B500270BB4 /* RWLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWLabel.swift; sourceTree = "<group>"; };
+		D4BF126B221490B500270BB4 /* SCNVector3Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNVector3Extension.swift; sourceTree = "<group>"; };
+		D4BF126C221490B500270BB4 /* FloatingPointExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingPointExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,18 +72,39 @@
 		D4BF12452213913100270BB4 /* ARKit-Demo */ = {
 			isa = PBXGroup;
 			children = (
+				D4BF126722148FE300270BB4 /* Helper Functions */,
+				D4BF126622148CA500270BB4 /* Emoji Images */,
 				D4BF12462213913100270BB4 /* AppDelegate.swift */,
 				D4BF12482213913100270BB4 /* ViewController.swift */,
+				D4BF12642213ABEA00270BB4 /* StoryViewController.swift */,
 				D4BF124A2213913100270BB4 /* Main.storyboard */,
 				D4BF124D2213913500270BB4 /* Assets.xcassets */,
-				D4BF125822139DA300270BB4 /* neutral.png */,
-				D4BF125E2213A02000270BB4 /* blinkLeft.png */,
-				D4BF12602213A02500270BB4 /* blinkRight.png */,
-				D4BF12622213A0D800270BB4 /* mouth.png */,
 				D4BF124F2213913500270BB4 /* LaunchScreen.storyboard */,
 				D4BF12522213913500270BB4 /* Info.plist */,
 			);
 			path = "ARKit-Demo";
+			sourceTree = "<group>";
+		};
+		D4BF126622148CA500270BB4 /* Emoji Images */ = {
+			isa = PBXGroup;
+			children = (
+				D4BF125822139DA300270BB4 /* neutral.png */,
+				D4BF125E2213A02000270BB4 /* blinkLeft.png */,
+				D4BF12602213A02500270BB4 /* blinkRight.png */,
+				D4BF12622213A0D800270BB4 /* mouth.png */,
+			);
+			path = "Emoji Images";
+			sourceTree = "<group>";
+		};
+		D4BF126722148FE300270BB4 /* Helper Functions */ = {
+			isa = PBXGroup;
+			children = (
+				D4BF12682214900B00270BB4 /* SCNNodeHelpers.swift */,
+				D4BF126C221490B500270BB4 /* FloatingPointExtension.swift */,
+				D4BF126A221490B500270BB4 /* RWLabel.swift */,
+				D4BF126B221490B500270BB4 /* SCNVector3Extension.swift */,
+			);
+			path = "Helper Functions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,7 +182,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4BF126D221490B500270BB4 /* RWLabel.swift in Sources */,
+				D4BF126E221490B500270BB4 /* SCNVector3Extension.swift in Sources */,
+				D4BF12692214900B00270BB4 /* SCNNodeHelpers.swift in Sources */,
+				D4BF12652213ABEA00270BB4 /* StoryViewController.swift in Sources */,
 				D4BF12492213913100270BB4 /* ViewController.swift in Sources */,
+				D4BF126F221490B500270BB4 /* FloatingPointExtension.swift in Sources */,
 				D4BF12472213913100270BB4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
