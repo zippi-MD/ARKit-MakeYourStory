@@ -15,17 +15,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var leftEyeImage: UIImageView!
     @IBOutlet weak var rightEyeImage: UIImageView!
     @IBOutlet weak var mouthImage: UIImageView!
+    @IBOutlet weak var characterView: UIView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        guard ARFaceTrackingConfiguration.isSupported else{
-            fatalError("FaceTracking is not supported on this device.")
+        if !ARFaceTrackingConfiguration.isSupported {
+            performSegue(withIdentifier: "StoryViewSegue", sender: nil)
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if !ARFaceTrackingConfiguration.isSupported {
+            performSegue(withIdentifier: "StoryViewSegue", sender: nil)
+        }
+        
         setupFaceTracking()
         
         mouthImage.isHidden = true
@@ -74,6 +80,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc: StoryViewController = segue.destination as! StoryViewController
+        
+        let renderer = UIGraphicsImageRenderer(size: characterView.frame.size)
+        let characterFace = renderer.image { (ctx) in
+            characterView.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        }
+        
+        vc.characterFace = characterFace
+        
         
     }
     

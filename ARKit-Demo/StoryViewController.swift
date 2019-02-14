@@ -18,6 +18,11 @@ class StoryViewController: UIViewController{
 
     @IBOutlet weak var crosshair: UIView!
     @IBOutlet var sceneView: ARSCNView!
+    @IBOutlet weak var informationView: UIView!
+    @IBOutlet weak var objectName: UILabel!
+    @IBOutlet weak var objectDescription: UILabel!
+    
+    var characterFace: UIImage? = nil
     
     var gameState: gameState = .selectingPlane
     
@@ -34,10 +39,14 @@ class StoryViewController: UIViewController{
         return CGPoint(x: viewBounds.width / 2.0, y: viewBounds.height / 2.0)
     }
     
+    let objectInformation: [String: (String, String)] = ["Green_platform": ("Pasto", "Hierba que come el ganado en el campo."), "Island":("Isla", "Porción de tierra rodeada de agua por todas partes"), "Boat":("Barco","Profesor con el que es facíl aprobar la materia"), "Tree":("Árbol", "Planta de tronco leñoso, grueso y elevado que se ramifica a cierta altura del suelo formando la copa."), "propeller":("Aspas","Elemento formado por dos palos que se atraviesan entre sí formando una cruz"), "Mill":("Molino","Construcción en forma de torre donde está instalada esta máquina")]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         crosshair.layer.cornerRadius = 5
+        informationView.isHidden = true
+        
         loadSceneModels()
         setupConfiguration()
     }
@@ -149,6 +158,14 @@ extension StoryViewController: ARSCNViewDelegate {
                 node.addChildNode(rotatingNode)
                 node.addChildNode(self.sea!)
                 node.addChildNode(self.island!)
+                
+                if let characterImage = self.characterFace {
+                    let characterFaceNode = SCNNode(geometry: SCNBox(width: 0.05, height: 0.05, length: 0.05, chamferRadius: 0))
+                    characterFaceNode.geometry?.materials.first?.diffuse.contents = characterImage
+                    
+                    characterFaceNode.position = SCNVector3(0, 0.4, 0)
+                    node.addChildNode(characterFaceNode)
+                }
             }
         }
         
@@ -165,6 +182,7 @@ extension StoryViewController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         DispatchQueue.main.async {
+            [unowned self] in
             switch self.gameState{
             case .selectingPlane:
                 if let _ = self.sceneView?.hitTest(self.viewCenter, types: [.existingPlaneUsingExtent]).first {
@@ -174,7 +192,21 @@ extension StoryViewController: ARSCNViewDelegate {
                     self.crosshair.backgroundColor = UIColor.lightGray
                 }
             case .viewingStory:
-                return
+                
+                if let hit = self.sceneView.hitTest(self.viewCenter, options: nil).first {
+                    guard let nodeName = hit.node.name else {return}
+                    
+                    if let nodeData = self.objectInformation[nodeName]{
+                        self.crosshair.backgroundColor = UIColor.green
+                        self.objectName.text = nodeData.0
+                        self.objectDescription.text = nodeData.1
+                        self.informationView.isHidden = false
+                    }
+                }
+                else {
+                    self.informationView.isHidden = true
+                    self.crosshair.backgroundColor = UIColor.lightGray
+                }
             }
         }
     }
