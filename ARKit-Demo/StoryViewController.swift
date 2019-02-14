@@ -21,6 +21,14 @@ class StoryViewController: UIViewController{
     
     var gameState: gameState = .selectingPlane
     
+    var boat: SCNNode? = nil
+    var island: SCNNode? = nil
+    var sea: SCNNode? = nil
+    
+    var storyAnchorExtent: simd_float3? = nil
+    
+    var debugPlanes = [SCNNode]()
+    
     var viewCenter: CGPoint {
         let viewBounds = view.bounds
         return CGPoint(x: viewBounds.width / 2.0, y: viewBounds.height / 2.0)
@@ -30,7 +38,7 @@ class StoryViewController: UIViewController{
         super.viewDidLoad()
         
         crosshair.layer.cornerRadius = 5
-        
+        loadSceneModels()
         setupConfiguration()
     }
     
@@ -45,18 +53,105 @@ class StoryViewController: UIViewController{
         sceneView.debugOptions = .showFeaturePoints
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if gameState == .selectingPlane {
+            if let hit = sceneView.hitTest(viewCenter, types: [.existingPlaneUsingExtent]).first{
+                
+                let hittedAnchor = hit.anchor as? ARPlaneAnchor
+                
+                storyAnchorExtent = hittedAnchor?.extent
+                
+                sceneView.session.add(anchor: ARAnchor.init(transform: hit.worldTransform))
+                sceneView.debugOptions = []
+                
+                let configuration = ARWorldTrackingConfiguration()
+                configuration.planeDetection = []
+                
+                sceneView.session.run(configuration)
+                
+                gameState = .viewingStory
+                removeDebugPlanes()
+                
+            }
+        }
+        
+    }
+    
+    func loadSceneModels(){
+        let storyScene = SCNScene(named: "StoryAssets.scnassets/StoryScene.scn")!
+        
+        for childNode in storyScene.rootNode.childNodes {
+            if let name = childNode.name {
+                switch name {
+                case "Boat":
+                    boat = childNode
+                case "Island":
+                    island = childNode
+                case "Sea":
+                    sea = childNode
+                default:
+                    continue
+                }
+            }
+        }
+        
+    }
+    
+    func removeDebugPlanes(){
+        for debugPlaneNode in debugPlanes {
+            debugPlaneNode.removeFromParentNode()
+        }
+        debugPlanes = []
+    }
+    
 
 }
 
 extension StoryViewController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else {return}
-        let plane = createPlaneNode(center: planeAnchor.center, extent: planeAnchor.extent)
         
-        DispatchQueue.main.async {
-            node.addChildNode(plane)
+        if let planeAnchor = anchor as? ARPlaneAnchor {
+            let plane = createPlaneNode(center: planeAnchor.center, extent: planeAnchor.extent)
+            debugPlanes.append(plane)
+            
+            DispatchQueue.main.async {
+                node.addChildNode(plane)
+            }
         }
+        else {
+            DispatchQueue.main.async {
+                [unowned self] in
+                self.sea?.position = SCNVector3(0, 0, 0)
+                
+                self.island?.position = SCNVector3(0, 0, 0)
+                self.island?.scale = SCNVector3(0.15, 0.15, 0.15)
+                
+                if let extent = self.storyAnchorExtent {
+                    self.sea?.scale = SCNVector3(extent.x/12.0, 0, extent.z/12.0)
+                }
+                
+                let rotatingNode = SCNNode()
+                rotatingNode.position = SCNVector3(0, 0, 0)
+                rotatingNode.scale = SCNVector3(0.5, 0.5, 0.5)
+                
+                let action = SCNAction.rotateBy(x: 0, y: CGFloat(GLKMathDegreesToRadians(-360)), z: 0, duration: 15)
+                let forever = SCNAction.repeatForever(action)
+                
+                rotatingNode.runAction(forever)
+                
+                self.boat?.position = SCNVector3(0.2, 0.02, 0.2)
+                self.boat?.scale = SCNVector3(0.1, 0.07, 0.02)
+                
+                rotatingNode.addChildNode(self.boat!)
+                
+                
+                node.addChildNode(rotatingNode)
+                node.addChildNode(self.sea!)
+                node.addChildNode(self.island!)
+            }
+        }
+        
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {

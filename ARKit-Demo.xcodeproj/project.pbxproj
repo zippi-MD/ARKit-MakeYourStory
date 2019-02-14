@@ -21,6 +21,7 @@
 		D4BF126D221490B500270BB4 /* RWLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BF126A221490B500270BB4 /* RWLabel.swift */; };
 		D4BF126E221490B500270BB4 /* SCNVector3Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BF126B221490B500270BB4 /* SCNVector3Extension.swift */; };
 		D4BF126F221490B500270BB4 /* FloatingPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BF126C221490B500270BB4 /* FloatingPointExtension.swift */; };
+		D4BF12712214A85500270BB4 /* StoryAssets.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D4BF12702214A85500270BB4 /* StoryAssets.scnassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		D4BF126A221490B500270BB4 /* RWLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWLabel.swift; sourceTree = "<group>"; };
 		D4BF126B221490B500270BB4 /* SCNVector3Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNVector3Extension.swift; sourceTree = "<group>"; };
 		D4BF126C221490B500270BB4 /* FloatingPointExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingPointExtension.swift; sourceTree = "<group>"; };
+		D4BF12702214A85500270BB4 /* StoryAssets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = StoryAssets.scnassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 		D4BF12452213913100270BB4 /* ARKit-Demo */ = {
 			isa = PBXGroup;
 			children = (
+				D4BF12702214A85500270BB4 /* StoryAssets.scnassets */,
 				D4BF126722148FE300270BB4 /* Helper Functions */,
 				D4BF126622148CA500270BB4 /* Emoji Images */,
 				D4BF12462213913100270BB4 /* AppDelegate.swift */,
@@ -171,6 +174,7 @@
 				D4BF124C2213913100270BB4 /* Main.storyboard in Resources */,
 				D4BF12632213A0D800270BB4 /* mouth.png in Resources */,
 				D4BF125F2213A02000270BB4 /* blinkLeft.png in Resources */,
+				D4BF12712214A85500270BB4 /* StoryAssets.scnassets in Resources */,
 				D4BF12612213A02500270BB4 /* blinkRight.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
