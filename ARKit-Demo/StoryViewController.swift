@@ -29,6 +29,7 @@ class StoryViewController: UIViewController{
     var boat: SCNNode? = nil
     var island: SCNNode? = nil
     var sea: SCNNode? = nil
+    var character: SCNNode? = nil
     
     var storyAnchorExtent: simd_float3? = nil
     
@@ -98,6 +99,8 @@ class StoryViewController: UIViewController{
                     island = childNode
                 case "Sea":
                     sea = childNode
+                case "Character":
+                    character = childNode
                 default:
                     continue
                 }
@@ -149,9 +152,14 @@ extension StoryViewController: ARSCNViewDelegate {
                 
                 rotatingNode.runAction(forever)
                 
-                self.boat?.position = SCNVector3(0.2, 0.02, 0.2)
-                self.boat?.scale = SCNVector3(0.1, 0.07, 0.02)
+                self.boat?.position = SCNVector3(0.2, 0.04, 0.2)
+                self.boat?.scale = SCNVector3(0.2, 0.09, 0.03)
                 
+                self.character?.position = SCNVector3(0.2, 0.02, 0.2)
+                self.character?.scale = SCNVector3(0.06, 0.06, 0.06)
+                
+                
+                rotatingNode.addChildNode(self.character!)
                 rotatingNode.addChildNode(self.boat!)
                 
                 
@@ -159,13 +167,15 @@ extension StoryViewController: ARSCNViewDelegate {
                 node.addChildNode(self.sea!)
                 node.addChildNode(self.island!)
                 
-                if let characterImage = self.characterFace {
-                    let characterFaceNode = SCNNode(geometry: SCNBox(width: 0.05, height: 0.05, length: 0.05, chamferRadius: 0))
-                    characterFaceNode.geometry?.materials.first?.diffuse.contents = characterImage
-                    
-                    characterFaceNode.position = SCNVector3(0, 0.4, 0)
-                    node.addChildNode(characterFaceNode)
-                }
+//                if let characterImage = self.characterFace {
+//                    let characterFaceNode = SCNNode(geometry: SCNSphere(radius: 0.3))
+//
+//                    characterFaceNode.geometry?.materials.first?.diffuse.contents = characterImage
+//                   
+//
+//                    characterFaceNode.position = SCNVector3(0, 0.4, 0)
+//                    node.addChildNode(characterFaceNode)
+//                }
             }
         }
         
